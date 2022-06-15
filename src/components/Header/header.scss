@@ -16,7 +16,7 @@
     min-height: 5rem;
     position: relative;
     background-color: transparent;
-    transition: box-shadow 300ms ease;
+    transition: box-shadow 300ms ease, background-color 200ms ease-out;
     img {
         max-width: 1.2in;
         margin-bottom: -6px;
@@ -24,7 +24,6 @@
 }
 
 .logo {
-    margin-top: 1rem;
     a {
         text-decoration: none;
         font-size: 1.2rem;
@@ -137,10 +136,6 @@
         img {
             max-width: 1.5in;
         }
-    }
-    
-    .logo {
-        margin-top: 2rem;
     }
 
     .burger {

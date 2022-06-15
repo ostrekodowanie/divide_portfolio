@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useResolvedPath, useMatch } from 'react-router-dom';
 import './header.css';
 import Logo from '../../assets/Logo.png';
@@ -6,6 +6,8 @@ import Logo from '../../assets/Logo.png';
 export default function Header({ currentState, overlay, height }) {
     const [currentNavbar, setNavbar] = useState(false)
     const [width, setWidth] = useState(window.document.documentElement.clientWidth)
+    const [scrollPosition, setScrollPosition] = useState(0)
+    const header = useRef(null)
 
     const showNav = () => {
         setNavbar(!currentNavbar)
@@ -27,9 +29,19 @@ export default function Header({ currentState, overlay, height }) {
         }
     }, [width])
 
+    useEffect(() => {
+        const scrollCallback = () => {
+            setScrollPosition(window.pageYOffset)
+        }
+        window.addEventListener('scroll', scrollCallback)
+        return () => {
+            window.removeEventListener('scroll', scrollCallback)
+        }
+    }, [scrollPosition])
+  
     return (
         <div className="header-wrapper" style={currentNavbar ? {zIndex: 100} : {}}>
-            <header className="header">
+            <header ref={header} className="header" style={scrollPosition === 0 ? {backgroundColor: 'transparent'} : {backgroundColor: '#181818'}}>
                 <div className="logo">
                     <Link to="/"><img src={Logo} alt="" /></Link>
                 </div>
