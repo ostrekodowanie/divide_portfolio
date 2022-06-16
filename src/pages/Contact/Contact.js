@@ -2,13 +2,31 @@ import './sass/contact.css';
 import envelope from '../../assets/Contact/envelope.svg';
 import phone from '../../assets/Contact/phone.svg';
 import send from '../../assets/Contact/send.svg';
+import emailjs from '@emailjs/browser';
+import { useState, useRef } from 'react';
 
 export default function Contact({ height }) {
+    const form = useRef();
+    const [status, setStatus] = useState('')
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        setStatus('Sending...')
+        console.log(status)
+        emailjs.sendForm('service_qwy9ukk', 'template_jbqh8vm', form.current, 'i1vA2ABNAGWOSY4Qd')
+            .then(() => {
+                setStatus('An email has been sent.')
+                console.log(status)
+            }, (error) => {
+                console.log(error)
+            });
+    }
+
     return (
         <section style={{minHeight: height}} className="section s-contact">
             <h1>CONTACT US</h1>
             <h3>Do you have any <span style={{color: '#3A86FF'}}>questions</span>? Contact us below.</h3>
-            <form>
+            <form ref={form} onSubmit={handleSubmit}>
                 <div className="form">
                     <div className="input-div">
                         <label htmlFor="email">Email address</label>
@@ -16,9 +34,12 @@ export default function Contact({ height }) {
                     </div>
                     <div className="input-div">
                         <label htmlFor="message">Message</label>
-                        <textarea id="message" name='email' placeholder="Type your message" />
+                        <textarea id="message" name='message' placeholder="Type your message" />
                     </div>
-                    <button type="submit">Send<img src={send} alt="" /></button>
+                    <div className="send">
+                        <button type="submit">Send<img src={send} alt="" /></button>
+                        <div className="alert" style={status === 'Sending...' ? {color: 'white'} : status === 'An email has been sent.' ? {color: 'green'} : {color: 'red'}}>{status}</div>
+                    </div>
                 </div>
             </form>
             <div className="horizontal-line"></div>

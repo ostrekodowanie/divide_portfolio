@@ -41,7 +41,7 @@ export default function Header({ currentState, overlay, height }) {
   
     return (
         <div className="header-wrapper" style={currentNavbar ? {zIndex: 100} : {}}>
-            <header ref={header} className="header" style={scrollPosition === 0 ? {backgroundColor: 'transparent'} : {backgroundColor: '#181818'}}>
+            <header ref={header} className="header" style={scrollPosition < 100 ? {backgroundColor: 'transparent'} : {backgroundColor: '#181818'}}>
                 <div className="logo">
                     <Link to="/"><img src={Logo} alt="" /></Link>
                 </div>

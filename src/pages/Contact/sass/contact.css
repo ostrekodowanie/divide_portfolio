@@ -44,10 +44,8 @@
   min-height: 10em;
 }
 .form button {
-  align-self: flex-end;
   display: flex;
   align-items: center;
-  margin-top: 0.6em;
   padding: 0.6em 2em;
   background-color: #3A86FF;
   color: #FFFFFF;
@@ -60,6 +58,16 @@
 .form button img {
   max-height: 0.9em;
   margin-left: 0.5em;
+}
+.form .send {
+  margin-top: 0.6em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  color: green;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .horizontal-line {
@@ -115,8 +123,13 @@
 .form textarea {
     font-size: 1.1rem;
   }
+  .form .send {
+    flex-direction: row;
+  }
   .form button {
+    padding: 0.6em 2.5em;
     font-size: 1.1rem;
+    align-self: flex-start;
   }
 
   .horizontal-line {
